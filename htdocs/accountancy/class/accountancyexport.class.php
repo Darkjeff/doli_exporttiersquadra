@@ -639,15 +639,15 @@ public function exportQuadratiers(&$TData) {
 			$Tab['libelle'] = str_pad(self::trunc($obj->nom, 20), 20);
 			$Tab['nullcolumn'] = str_repeat(' ', 52);
 			$Tab['num_compte'] = str_pad(self::trunc($data->numero_compte, 8), 8);
-			//$Tab['nullcolumn'] = str_repeat(' ', 111);
+			//$Tab['nullcolumn2'] = str_repeat(' ', 111);
 			
-			if (substr($data->numero_compte, 0, 3) == '411') {
-					$Tab['type_ligne'] = 'C';
+			if ($data->numero_compte == '411') {
+					$Tab['type_compte'] = 'C';
 				}
-			if (substr($data->numero_compte, 0, 3) == '401') {
-					$Tab['type_ligne'] = 'F';
+			if ($data->numero_compte == '401') {
+					$Tab['type_compte'] = 'F';
 				}
-				
+				$Tab['type_compte'] = 'G';
 				
 		
 			$Tab['end_line'] = $end_line;
