@@ -638,7 +638,7 @@ public function exportQuadratiers(&$TData) {
 					} 
 				
 			$Tab = array ();
-			if ($data->numero_compte == 411)
+			if ($data->numero_compte == 410)
 			{
 			$Tab['type_ligne'] = 'C';
 			$Tab['subledger_account'] = str_pad(self::trunc($data->subledger_account, 8), 8);
