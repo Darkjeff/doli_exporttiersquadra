@@ -648,14 +648,7 @@ public function exportQuadratiers(&$TData) {
 			$Tab['town'] = str_pad(self::trunc($obj->town, 30), 30);
 			$Tab['phone'] = str_pad(self::trunc($obj->phone, 20), 20);
 			$Tab['nullcolumn2'] = str_repeat(' ', 1);
-			
-			if ($data->numero_compte == '411') {
-					$Tab['type_compte'] = 'C';
-				}
-			if ($data->numero_compte == '401') {
-					$Tab['type_compte'] = 'F';
-				}
-				$Tab['type_compte'] = 'C';
+			$Tab['type_compte'] = 'C';
 				
 		
 			$Tab['end_line'] = $end_line;
