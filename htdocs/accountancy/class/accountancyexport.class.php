@@ -612,17 +612,17 @@ public function exportQuadratiers(&$TData) {
 		$end_line ="\r\n";
 		
 		foreach ( $TData as $data ) {
-			$code_compta = "";
-			if (! empty($data->subledger_account))
-				$code_subledger = $data->subledger_account;
-				$thirdparty_label = $data->thirdparty_label;
+			//$code_compta = "";
+			//if (! empty($data->subledger_account))
+			//	$code_subledger = $data->subledger_account;
+			//	$thirdparty_label = $data->thirdparty_label;
 				
 			$Tab = array ();
 			$Tab['type_ligne'] = 'C';
-			$Tab['num_compte'] = str_pad(self::trunc($code_subledger, 8), 8);
-			$Tab['libelle'] = str_pad(self::trunc($data->thirdparty_label, 20), 20);
+			$Tab['num_compte'] = str_pad(self::trunc($data->subledger_account, 8), 8);
+			$Tab['libelle'] = str_pad(self::trunc($data->subledger_label, 20), 20);
 			$Tab['nullcolumn'] = str_repeat(' ', 52);
-			$Tab['num_compte'] = str_pad(self::trunc($code_compta, 8), 8);
+			$Tab['num_compte'] = str_pad(self::trunc($data->numero_compte, 8), 8);
 			$Tab['nullcolumn'] = str_repeat(' ', 111);
 			$Tab['type_ligne'] = 'C';
 			
