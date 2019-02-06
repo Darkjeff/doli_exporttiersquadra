@@ -655,7 +655,7 @@ public function exportQuadratiers(&$TData) {
 			if ($data->numero_compte == '401') {
 					$Tab['type_compte'] = 'F';
 				}
-				$Tab['type_compte'] = 'G';
+				$Tab['type_compte'] = 'C';
 				
 		
 			$Tab['end_line'] = $end_line;
