@@ -612,6 +612,7 @@ public function exportQuadratiers(&$TData) {
 		$end_line ="\r\n";
 		
 		foreach ( $TData as $data ) {
+		
 			$code_compta = " ";
 			if (! empty($data->subledger_account))
 				$code_compta = $data->subledger_account;
@@ -639,17 +640,18 @@ public function exportQuadratiers(&$TData) {
 				
 			$Tab = array ();
 			if ($data->numero_compte == 410)
+			//if ($data->numero_compte == 411)
 			{
 			$Tab['type_ligne'] = 'C';
 			$Tab['subledger_account'] = str_pad(self::trunc($data->subledger_account, 8), 8);
 			$Tab['libelle'] = str_pad(self::trunc($obj->nom, 20), 20);
 			$Tab['nullcolumn'] = str_repeat(' ', 52);
 			$Tab['num_compte'] = str_pad(self::trunc($data->numero_compte, 8), 8);
-			$Tab['adress'] = str_pad(self::trunc($obj->address, 30), 30);
-			$Tab['zip'] = str_pad(self::trunc($obj->zip, 30), 30);
-			$Tab['town'] = str_pad(self::trunc($obj->town, 30), 30);
-			$Tab['phone'] = str_pad(self::trunc($obj->phone, 20), 20);
-			$Tab['nullcolumn2'] = str_repeat(' ', 1);
+			//$Tab['adress'] = str_pad(self::trunc(dol_string_unaccent($obj->address), 30), 30);
+			//$Tab['zip'] = str_pad(self::trunc($obj->zip, 30), 30);
+			//$Tab['town'] = str_pad(self::trunc($obj->town, 30), 30);
+			//$Tab['phone'] = str_pad(self::trunc($obj->phone, 20), 20);
+			$Tab['nullcolumn2'] = str_repeat(' ', 121);
 			$Tab['type_compte'] = 'C';
 			$Tab['end_line'] = $end_line;
 			}
