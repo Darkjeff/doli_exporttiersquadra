@@ -612,20 +612,43 @@ public function exportQuadratiers(&$TData) {
 		$end_line ="\r\n";
 		
 		foreach ( $TData as $data ) {
-			//$code_compta = "";
-			//if (! empty($data->subledger_account))
-			//	$code_subledger = $data->subledger_account;
-			//	$thirdparty_label = $data->thirdparty_label;
+			$code_compta = $data->thirdparty_code;
+			if (! empty($data->subledger_account))
+				$code_compta = $data->subledger_account;
+				
+			
+			$sql = " SELECT s.nom, s.code_compta";
+			$sql .= " FROM " . MAIN_DB_PREFIX . "societe as s ";
+			$sql .= " WHERE s.code_compta = " . '\'' . $data->subledger_account . '\'';
+			
+			$resql = $this->db->query($sql);
+		if ($resql) {
+			$numrows = $this->db->num_rows($resql);
+			if ($numrows) {
+			$obj = $this->db->fetch_object($resql);
+			
+			$this->nom = $obj->nom;
+			
+			}
+			
+		} 
 				
 			$Tab = array ();
 			$Tab['type_ligne'] = 'C';
-			$Tab['num_compte'] = str_pad(self::trunc($data->subledger_account, 8), 8);
-			$Tab['libelle'] = str_pad(self::trunc($data->subledger_label, 20), 20);
+			$Tab['subledger_account'] = str_pad(self::trunc($code_compta, 8), 8);
+			$Tab['libelle'] = str_pad(self::trunc($obj->nom, 20), 20);
 			$Tab['nullcolumn'] = str_repeat(' ', 52);
 			$Tab['num_compte'] = str_pad(self::trunc($data->numero_compte, 8), 8);
-			$Tab['nullcolumn'] = str_repeat(' ', 111);
-			$Tab['type_ligne'] = 'C';
+			//$Tab['nullcolumn'] = str_repeat(' ', 111);
 			
+			if (substr($data->numero_compte, 0, 3) == '411') {
+					$Tab['type_ligne'] = 'C';
+				}
+			if (substr($data->numero_compte, 0, 3) == '401') {
+					$Tab['type_ligne'] = 'F';
+				}
+				
+				
 		
 			$Tab['end_line'] = $end_line;
 
