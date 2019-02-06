@@ -617,21 +617,25 @@ public function exportQuadratiers(&$TData) {
 				$code_compta = $data->subledger_account;
 				
 			
-			$sql = " SELECT s.nom, s.code_compta";
+			$sql = " SELECT s.nom, s.address, s.zip, s.town, s.phone, s.code_compta";
 			$sql .= " FROM " . MAIN_DB_PREFIX . "societe as s ";
 			$sql .= " WHERE s.code_compta = " . '\'' . $data->subledger_account . '\'';
 			
 			$resql = $this->db->query($sql);
 		if ($resql) {
 			$numrows = $this->db->num_rows($resql);
-			if ($numrows) {
+			if ($numrows) 	{
 			$obj = $this->db->fetch_object($resql);
 			
 			$this->nom = $obj->nom;
+			$this->address = $obj->address;
+			$this->zip = $obj->zip;
+			$this->town = $obj->town;
+			$this->phone = $obj->phone;
 			
-			}
+							}
 			
-		} 
+					} 
 				
 			$Tab = array ();
 			$Tab['type_ligne'] = 'C';
@@ -639,7 +643,11 @@ public function exportQuadratiers(&$TData) {
 			$Tab['libelle'] = str_pad(self::trunc($obj->nom, 20), 20);
 			$Tab['nullcolumn'] = str_repeat(' ', 52);
 			$Tab['num_compte'] = str_pad(self::trunc($data->numero_compte, 8), 8);
-			//$Tab['nullcolumn2'] = str_repeat(' ', 111);
+			$Tab['adress'] = str_pad(self::trunc($obj->address, 30), 30);
+			$Tab['zip'] = str_pad(self::trunc($obj->zip, 30), 30);
+			$Tab['town'] = str_pad(self::trunc($obj->town, 30), 30);
+			$Tab['phone'] = str_pad(self::trunc($obj->phone, 20), 20);
+			$Tab['nullcolumn2'] = str_repeat(' ', 1);
 			
 			if ($data->numero_compte == '411') {
 					$Tab['type_compte'] = 'C';
