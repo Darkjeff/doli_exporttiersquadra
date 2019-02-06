@@ -612,7 +612,7 @@ public function exportQuadratiers(&$TData) {
 		$end_line ="\r\n";
 		
 		foreach ( $TData as $data ) {
-			$code_compta = $data->thirdparty_code;
+			$code_compta = " ";
 			if (! empty($data->subledger_account))
 				$code_compta = $data->subledger_account;
 				
@@ -638,8 +638,10 @@ public function exportQuadratiers(&$TData) {
 					} 
 				
 			$Tab = array ();
+			if ($data->numero_compte == 411)
+			{
 			$Tab['type_ligne'] = 'C';
-			$Tab['subledger_account'] = str_pad(self::trunc($code_compta, 8), 8);
+			$Tab['subledger_account'] = str_pad(self::trunc($data->subledger_account, 8), 8);
 			$Tab['libelle'] = str_pad(self::trunc($obj->nom, 20), 20);
 			$Tab['nullcolumn'] = str_repeat(' ', 52);
 			$Tab['num_compte'] = str_pad(self::trunc($data->numero_compte, 8), 8);
@@ -649,10 +651,10 @@ public function exportQuadratiers(&$TData) {
 			$Tab['phone'] = str_pad(self::trunc($obj->phone, 20), 20);
 			$Tab['nullcolumn2'] = str_repeat(' ', 1);
 			$Tab['type_compte'] = 'C';
-				
-		
 			$Tab['end_line'] = $end_line;
-
+			}
+			
+			
 			print implode($Tab);
 		}
 
